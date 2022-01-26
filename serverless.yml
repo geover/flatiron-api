@@ -1,0 +1,97 @@
+service: aws-lambda
+frameworkVersion: '2'
+useDotenv: true
+
+custom: 
+  dynamodb:
+    stages: 
+      - dev
+    start:
+      port: 8000
+      inMemory: true
+      migrate: true
+      seed: true
+    seed:
+      users:
+        sources:
+          - table: users
+            sources: [offline/seeds/users.json]
+    migration:
+      dir: offline/migrations
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  lambdaHashingVersion: 20201221
+  stage: ${opt:stage, 'dev'}
+  iam:
+    role:
+      statements:
+        - Effect: "Allow"
+          Action:
+            - dynamodb:*
+          Resource: "*"
+
+plugins:
+  - serverless-dynamodb-local
+  - serverless-offline
+functions:
+  signUp:
+    handler: src/lambda/sign-up.signUp
+    events:
+      - http:
+          path: sign-up
+          method: post
+          cors: true
+  signIn:
+    handler: src/lambda/sign-in.signIn
+    events:
+      - http:
+          path: sign-in
+          method: post
+          cors: true
+  getApiKey:
+    handler: src/lambda/get-api-key.getApiKey
+    events:
+      - http:
+          path: get-api-key
+          method: post
+          cors: true
+  check:
+    handler: src/lambda/check.check
+    events:
+      - http:
+          path: check
+          method: post
+          cors: true
+  getUser:
+    handler: src/lambda/get-user.handler
+    events:
+      - http:
+          path: get-user
+          method: get
+          cors: true
+
+resources:
+  Resources:
+    usersTable:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: users
+        AttributeDefinitions:
+          - AttributeName: userId
+            AttributeType: S
+          - AttributeName: email
+            AttributeType: S
+        KeySchema:
+          - AttributeName: userId
+            KeyType: HASH
+        GlobalSecondaryIndexes:
+          - IndexName: usersByEmail
+            KeySchema:
+              - AttributeName: email
+                KeyType: HASH
+            Projection:
+              ProjectionType: 'ALL'
+        BillingMode: PAY_PER_REQUEST
+

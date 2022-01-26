@@ -1,0 +1,17 @@
+[
+  {
+    "userId": "0afb2f68-d81d-4dde-a591-2bd2398cab41",
+    "email": "ronelcarlo.berino@gmail.com",
+    "firstname": "Ronel Carlo",
+    "lastname": "Berino",
+    "apiKey": "349751bb-625f-4eb7-b95a-2595a4f6b762",
+    "password": "$2a$10$HSJXjlgIGNrkZ6XoDj3SEeEtUh1Zps7utMbKTh9upPOmii0l/8XNy"
+  },
+  {
+    "userId": "0afb2f68-d81d-4dde-a591-2bd2398cab42",
+    "email": "ronelcarlo.berino@gmail.com",
+    "name": "Ronel Carlo Berino",
+    "apiKey": "349751bb-625f-4eb7-b95a-2595a4f6b763",
+    "password": "custompassword"
+  }
+]

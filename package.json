@@ -1,0 +1,39 @@
+{
+  "name": "flat-iron-cyber-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "dependencies": {
+    "aws-sdk": "^2.913.0",
+    "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
+    "crypto-js": "^4.0.0",
+    "jsonwebtoken": "^8.5.1",
+    "md5": "^2.3.0",
+    "serverless": "^2.43.1",
+    "uuid": "^8.3.2",
+    "xss": "^1.0.9"
+  },
+  "devDependencies": {
+    "serverless-dynamodb-local": "^0.2.40",
+    "serverless-offline": "^7.0.0"
+  },
+  "scripts": {
+    "start": "sls offline start",
+    "deploy": "sls deploy",
+    "deploy-staging": "sls deploy --stage staging",
+    "deploy-all": "npm run deploy && npm run deploy-staging",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alekhin-Solutions/flat-iron-cyber-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Alekhin-Solutions/flat-iron-cyber-api/issues"
+  },
+  "homepage": "https://github.com/Alekhin-Solutions/flat-iron-cyber-api#readme"
+}
